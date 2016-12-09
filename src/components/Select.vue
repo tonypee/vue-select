@@ -637,7 +637,9 @@
 			 * @return {array}
 			 */
 			filteredOptions() {
-				const options = this.currentOptions.filter(option => ~option.indexOf(this.search))
+				const options = this.currentOptions && this.currentOptions.filter ?
+					this.currentOptions.filter(option => ~option.indexOf(this.search)) :
+					[]
 				if (this.taggable && this.search.length && !this.optionExists(this.search)) {
 					options.unshift(this.search)
 				}
