@@ -638,8 +638,10 @@
 			 */
 			filteredOptions() {
 				const options = this.currentOptions && this.currentOptions.filter ?
-					this.currentOptions.filter(option => ~option.indexOf(this.search)) :
-					[]
+					this.currentOptions.filter(option => {
+						const val = typeof option == 'object' && option.label || option
+						return ~String(val).indexOf(this.search)
+					}) : []
 				if (this.taggable && this.search.length && !this.optionExists(this.search)) {
 					options.unshift(this.search)
 				}
